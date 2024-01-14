@@ -1,0 +1,121 @@
+body{
+    margin-top: 2%;
+    padding-top: 2%;
+    /* background-color: #ead7ce; */
+}
+
+.phonebook{
+    display:flex;
+    justify-content: center;
+}
+
+h1{
+    text-align: center;
+    border:3px solid brown;
+    border-radius: 10px;
+    /* background-color: antiquewhite; */
+    color: brown;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* home page */
+.CS{
+    display:flex;
+    justify-content: center;
+}
+
+#unique{
+    position: relative;
+    left:20%;
+    color:black;
+    background-color: bisque;
+    border:2px solid brown;
+    height:10%;
+    width:10%;
+    border-radius: 50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image{
+    padding-top: 4%;
+    margin-top: 2%;
+    height:10%;
+    width:10%;
+    border-radius: 50%;
+    
+}
+
+h4{
+    margin:2%;
+}
+
+.all_students{
+    padding:1%;
+}
+
+.box{
+    height:100px;
+    width:200px;
+    border:2px solid brown;
+    border-radius: 6px;
+    /* background-color: antiquewhite; */
+    color:brown;
+}
+
+.each_student{
+    position: relative;
+    left:10%;
+}
+
+
+.button{
+    margin: 20px 0;
+    display:flex;
+    justify-content: center;
+}
+
+.btn{
+    padding: 10px 15px;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #fff;
+    text-align: center;
+}
+
+#add{
+  background-color: #2ecc71;
+}
+
+#edit{
+    background-color: blue;
+}
+
+#delete{
+    background-color: red;
+}
+/* ------------------------------------------------ */
+/* add user page */
+.input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.value{
+    color:brown;
+    padding:10px,15px;
+    margin:10px;
+}
+
+/* edit page */
+#textbox{
+    border:2px solid brown;
+    border-radius: 40px;
+}

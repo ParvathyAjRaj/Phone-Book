@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add user</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <hr>
+    <h1>Add new contact</h1>
+    <hr>
+    <br>
+    <div class="add_form">
+        <form method="POST" action="/add">
+            <div class="input">
+                <label class="value">Id No.</label>
+                <input id="textbox" class="value" type="text" name="id">
+            </div>
+            <div class="input">
+                <label class="value">Name</label>
+                <input id="textbox" class="value" type="text" name="name">
+            </div>
+            <div class="input">
+                <label class="value">Contact</label>
+                <input id="textbox" class="value" type="text" name="contact">
+            </div>
+            <div class="button">
+                <button class="btn" id="add" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

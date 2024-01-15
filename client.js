@@ -85,10 +85,8 @@ app.post("/update/:index",async(req,res)=>{
     let index = parseInt(req.params.index);
     let req_details = {name:req.body.name,contact:req.body.contact,index:index};
     const response = await axios.patch(`${API_URL}/edit`,req_details);
-    console.log(response.data);
     const details = response.data.data;
     const length = response.data.length;
-    console.log(details,length);
     let next = `http://localhost:${port}/home`
     let back = `http://localhost:${port}/home`
     if(index <= length){

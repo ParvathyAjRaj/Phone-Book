@@ -18,6 +18,13 @@ app.get("/phonebook",(req,res)=>{
     res.json(posts);
 })
 
+// give post with specific name
+app.get("/search/:name",(req,res) => {
+    const name = req.params.name;
+    let index = posts.findIndex((post) => post.name.toLowerCase() === name.toLowerCase())
+    res.json({data : posts[index],index : index,length : posts.length});
+})
+
 // give post with specific id
 app.get("/phonebook/:id",(req,res)=>{
     const user_id = parseInt(req.params.id) 

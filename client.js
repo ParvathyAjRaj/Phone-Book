@@ -23,6 +23,41 @@ app.get("/phonebook",async(req,res) => {
  })
 })
 
+// on clicking search button from home page, go to search.ejs
+app.get("/search",(req,res)=>{
+    res.render("search.ejs");
+});
+
+
+// on clicking search button in search.ejs, ask server to search this name
+app.get("/search_name",async(req,res) => {
+    let name = req.query.name;
+    const response = await axios.get(`${API_URL}/search/${name}`);
+    const data = response.data.data;
+    const index = response.data.index;
+    const length = response.data.length;
+    let next = `http://localhost:${port}/home`
+    let back = `http://localhost:${port}/home`
+    if(index <= length){
+        next = `http://localhost:${port}/phonebook/${index+1}`
+        if (index > 0){
+            back = `http://localhost:${port}/phonebook/${index-1}`
+        }
+    }
+    if (data){
+        res.render("open.ejs",{
+            details : [data],
+            next: next,
+            back:back,
+            index : index
+        })
+    }
+    else{
+        res.render("no_result.ejs");
+    }
+    
+})
+
 // Get a specific post by id
 app.get("/phonebook/:index",async(req,res) => {
     let index = parseInt(req.params.index);
@@ -103,7 +138,7 @@ app.post("/update/:index",async(req,res)=>{
     })
 })
 
-// on clicking delete button in deleteUser.ejs, ask server to delete any user
+// on clicking delete button in open.ejs, ask server to delete any user
 app.get("/delete/:index",async(req,res) => {
     let index = parseInt(req.params.index);
     const response = await axios.delete(`${API_URL}/remove/${index}`);

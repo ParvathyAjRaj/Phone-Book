@@ -92,6 +92,12 @@ h4{
     background-color: wheat;
 }
 
+#search{
+    margin-right: 2%;
+    margin-bottom: 2%;
+    background-color: #FFF192;
+}
+
 #add{
     margin-left: 5%;
     margin-bottom: 2%;
@@ -100,7 +106,7 @@ h4{
 }
 
 #list{
-    background-color: wheat;
+    background-color:#E6E6FA;
     margin-left: 5%;
     margin-bottom: 2%;
 }
@@ -148,4 +154,15 @@ h4{
 #textbox{
     border:2px solid black;
     border-radius: 40px;
+}
+
+/* no result page*/
+.no_result{
+    font-size: large;
+    display: flex;
+    justify-content: center;
+}
+
+.no-result-head{
+    background-color: #FF7F7F;
 }

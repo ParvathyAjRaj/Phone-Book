@@ -18,18 +18,18 @@ app.get("/home",(req,res)=>{
 // Get all posts
 app.get("/phonebook",async(req,res) => {
  const response = await axios.get(`${API_URL}/phonebook`);
- res.render("summary.ejs",{
+ res.render("contactList.ejs",{
     details : response.data,
  })
 })
 
-// on clicking search button from home page, go to search.ejs
+// on clicking search button from home page, go to contactList.ejs
 app.get("/search",(req,res)=>{
     res.render("search.ejs");
 });
 
 
-// on clicking search button in search.ejs, ask server to search this name
+// on clicking search button in contactList.ejs, ask server to search this name
 app.get("/search_name",async(req,res) => {
     let name = req.query.name;
     if(name){
@@ -46,7 +46,7 @@ app.get("/search_name",async(req,res) => {
             }
         }
         if (data){
-            res.render("open.ejs",{
+            res.render("openBook.ejs",{
                 details : [data],
                 next: next,
                 back:back,
@@ -78,7 +78,7 @@ app.get("/phonebook/:index",async(req,res) => {
         }
     }
     if (details.data){
-        res.render("open.ejs",{
+        res.render("openBook.ejs",{
             details : [details.data],
             next: next,
             back:back,
@@ -90,12 +90,12 @@ app.get("/phonebook/:index",async(req,res) => {
     }
 })
 
-// on clicking add option in home page, go to addUser.ejs
+// on clicking add option in home page, go to addContact.ejs
 app.get("/new",async(req,res) => {
-    res.render("addUser.ejs");
+    res.render("addContact.ejs");
 })
 
-// on clicking add button in addUser.ejs, ask server to add this user
+// on clicking add button in addContact.ejs, ask server to add this user
 app.post("/add",async(req,res) => {
     const response = await axios.post(`${API_URL}/add`,req.body);
     res.render("home.ejs",{
@@ -103,7 +103,7 @@ app.post("/add",async(req,res) => {
     })
 })
 
-// on clicking edit option in home page, go to editUser.ejs
+// on clicking edit option in home page, go to editContact.ejs
 app.get("/edit/:index",async(req,res) => {
     let index = parseInt(req.params.index);
     let request_id = uuidv4()
@@ -115,13 +115,13 @@ app.get("/edit/:index",async(req,res) => {
     });
     let details = response.data;
     // console.log("[CLIENT] obtained phonebook by id", details, request_id)
-    res.render("editUser.ejs",{
+    res.render("editContact.ejs",{
         details:[details.data],
         index : index
     });
 })
 
-// on clicking edit button in editUser.ejs, ask server to update the user
+// on clicking edit button in editContact.ejs, ask server to update the user
 app.post("/update/:index",async(req,res)=>{
     let index = parseInt(req.params.index);
     let req_details = {name:req.body.name,contact:req.body.contact,index:index};
@@ -136,7 +136,7 @@ app.post("/update/:index",async(req,res)=>{
             back = `http://localhost:${port}/phonebook/${index-1}`
         }
     }
-    res.render("open.ejs",{
+    res.render("openBook.ejs",{
         details : [details],
         index:index,
         back:back,
@@ -144,7 +144,7 @@ app.post("/update/:index",async(req,res)=>{
     })
 })
 
-// on clicking delete button in open.ejs, ask server to delete any user
+// on clicking delete button in openBook.ejs, ask server to delete any user
 app.get("/delete/:index",async(req,res) => {
     let index = parseInt(req.params.index);
     const response = await axios.delete(`${API_URL}/remove/${index}`);

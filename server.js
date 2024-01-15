@@ -7,7 +7,7 @@ const port = 2000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json())
 
-let posts=[
+let contacts=[
     {name:"Ajay",contact:"12345"},
     {name:"Parvathy",contact:"34567"},
     {name:"Vaani",contact:"56789"}
@@ -15,14 +15,14 @@ let posts=[
 
 // give all posts 
 app.get("/phonebook",(req,res)=>{
-    res.json(posts);
+    res.json(contacts);
 })
 
 // give post with specific name
 app.get("/search/:name",(req,res) => {
     const name = req.params.name;
-    let index = posts.findIndex((post) => post.name.toLowerCase() === name.toLowerCase())
-    res.json({data : posts[index],index : index,length : posts.length});
+    let index = contacts.findIndex((contact) => contact.name.toLowerCase() === name.toLowerCase())
+    res.json({data : contacts[index],index : index,length : contacts.length});
 })
 
 // give post with specific id
@@ -30,14 +30,14 @@ app.get("/phonebook/:id",(req,res)=>{
     const user_id = parseInt(req.params.id) 
     let request_id = req.headers["request_id"] 
     // console.log("[SERVER] received request id", request_id)
-    const post = posts[user_id]
+    const contact = contacts[user_id]
     const result = {
-        "data": post,
-        "length": posts.length,
+        "data": contact,
+        "length": contacts.length,
     }
     // console.log("result to send", result)
     res.json(result).on("error", (err)=>{
-        console.log(`couldnt write post : ${err}`)
+        console.log(`couldnt write contact : ${err}`)
     })
 })
 
@@ -48,22 +48,22 @@ app.post("/add",(req,res) => {
         name : req.body.name,
         contact : req.body.contact
     }
-    posts.push(new_user);
-    res.json(posts);
+    contacts.push(new_user);
+    res.json(contacts);
 })
 
 // edit one of the posts
 app.patch("/edit",(req,res)=> {
-    const post_index = parseInt(req.body.index);
-    const new_name = req.body.name || posts[post_index].name;
-    const new_contact = req.body.contact || posts[post_index].contact;
+    const contact_index = parseInt(req.body.index);
+    const new_name = req.body.name || contacts[contact_index].name;
+    const new_contact = req.body.contact || contacts[contact_index].contact;
     let updated_post = {
             name : new_name,
             contact : new_contact
         };
-    posts[post_index] = updated_post;
-    res.json({"data":posts[post_index],
-            "length":posts.length});
+    contacts[contact_index] = updated_post;
+    res.json({"data":contacts[contact_index],
+            "length":contacts.length});
 })
 
 // delete the post
@@ -71,11 +71,11 @@ app.delete("/remove/:index",(req,res) => {
     let remove_index = parseInt(req.params.index);
     // splice method => splice(starting index, no of elements to be removed from starting index)
     if(remove_index > -1){
-        posts.splice(remove_index,1);
-        res.json(posts);
+        contacts.splice(remove_index,1);
+        res.json(contacts);
     }
     else{
-        res.json(posts);
+        res.json(contacts);
     }
 })
 

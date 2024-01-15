@@ -10,22 +10,38 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+app.get("/home",(req,res)=>{
+    res.render("home.ejs");
+})
+
 // Get all posts
 app.get("/phonebook",async(req,res) => {
  const response = await axios.get(`${API_URL}/phonebook`);
- res.render("home.ejs",{
-    details : response.data
+ res.render("open.ejs",{
+    details : response.data,
+    index:0
  })
 })
 
 // Get a specific post by id
 app.get("/phonebook/:id",async(req,res) => {
-    let id = req.params.id;
+    let id = parseInt(req.params.id);
     const response = await axios.get(`${API_URL}/phonebook/${id}`);
-    let details = [response.data];
-    res.render("home.ejs",{
-        details : details
-    })
+    let details = response.data;
+    let next = `http://localhost:${port}/home`
+    console.log(details);
+    if(id <= details.length){
+        next = `http://localhost:${port}/phonebook/${id+1}`
+    }
+    if (details.data){
+        res.render("open.ejs",{
+            details : [details.data],
+            next: next,
+        })
+    }
+    else{
+        res.render("home.ejs");
+    }
 })
 
 // on clicking add option in home page, go to addUser.ejs

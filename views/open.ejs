@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Phone Book</title>
+    <link rel="stylesheet" href="/styles/new.css">
+</head>
+<body>
+    <div>
+        <%
+        let name = details[0].name
+        let contact =  details[0].contact     
+        %>
+        <p>
+            <%= name %>
+            <%= contact %>
+        </p>
+
+        <div class="button">
+            <a class="btn" id="edit" href="/edit">Edit Contact</a>
+        </div>
+        <div class="button">
+            <a class="btn" id="delete" href="/del">Delete Contact</a>
+        </div>
+    </div>
+    <div class="button">
+        <a class="btn" id="next" href="<%= next %>">Next Page</a>
+    </div>
+</body>
+</html>

@@ -4,24 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <!-- <link rel="stylesheet" href="/styles/main.css"> -->
+    <link rel="stylesheet" href="/styles/new.css">
 </head>
 <body>
-    <div class="phonebook">
-        <img  src="/images/phone_book.png" width="8%" height="8%" alt="phone book">
+    <div class="image-container">
+        <img  src="/images/closed_book_gif_1.gif" alt="phone book" height="40%" width="40%">
+        <div class="button">
+            <a class="btn" id="open" href="/phonebook/0">Open</a>
+        </div>
     </div>
-    <!-- <hr style="color:brown"> -->
+    
+    
+    
+
+    <!-- old -->
+    <!-- <hr style="color:brown">
     <h1>Phone Book</h1>
-    <!-- <hr> -->
     <br>
     <div class="CS">
-        <ul class="all_students">
+        <ul class="all_students"> -->
             <% if (locals.details) {%>
                 <% for( var i = 0;i<details.length;i++){ %>
                        <% let id = details[i].id;%>
                        <% let name = details[i].name; %>
                        <% let phone_num = details[i].contact %>
-                        <div class="box">
+                        <!-- <div class="box">
                             <div>
                                 <dl>
                                     <dd id="unique"><%= id %></dd>
@@ -30,11 +38,11 @@
                                 </dl>
                             </div>
                         </div>
-                        <br>
+                        <br> -->
                    <% } %>
            <% } %>
         </ul>
-    </div>
+    <!-- </div>
     <div class="button">
         <a class="btn" id="add" href="/new">New Contact</a>
     </div>
@@ -43,6 +51,6 @@
     </div>
     <div class="button">
         <a class="btn" id="delete" href="/del">Delete Contact</a>
-    </div>    
+    </div>     -->
 </body>
 </html>

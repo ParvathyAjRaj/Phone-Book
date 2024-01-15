@@ -8,9 +8,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json())
 
 let posts=[
-    {id:1,name:"Ajay",contact:"12345"},
-    {id:2,name:"Parvathy",contact:"34567"},
-    {id:3,name:"Vaani",contact:"56789"}
+    {name:"Ajay",contact:"12345"},
+    {name:"Parvathy",contact:"34567"},
+    {name:"Vaani",contact:"56789"}
 ]
 
 // give all posts 
@@ -21,7 +21,12 @@ app.get("/phonebook",(req,res)=>{
 // give post with specific id
 app.get("/phonebook/:id",(req,res)=>{
     const user_id = parseInt(req.params.id);
-    const result = posts.find((post) => post.id === user_id);
+    const post = posts[user_id]
+    const result = {
+        "data": post,
+        "length": posts.length,
+    }
+   // const result = posts.find((post) => post.id === user_id);
     res.json(result);
 })
 

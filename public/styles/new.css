@@ -7,6 +7,7 @@
         transition: background-color 0.3s;
         color: black;
         text-align: center;
+        
     }
 }
 
@@ -22,16 +23,21 @@ h1{
     transition: background-color 0.3s;
 }
 
+h4{
+    margin:2%;
+}
+
 .image-container{
     display: flex;
     justify-content: center;
     align-items: center;
     width:100%;
     height:30%;
+    flex-wrap: wrap;
 }
 
 /* summary page */
-.CS{
+.summary{
     display:flex;
     justify-content: center;
 }
@@ -43,18 +49,14 @@ h1{
     height:10%;
     width:10%;
     border-radius: 50%;
-    
 }
 
-h4{
-    margin:2%;
-}
-
-.all_students{
+/* contact box and lists */
+.all_contacts{
     padding:1%;
 }
 
-.box{
+.box,.open-box{
     height:100px;
     width:200px;
     border:2px solid brown;
@@ -63,14 +65,13 @@ h4{
     color:brown;
 }
 
-.each_student{
+.each_contact{
     position: relative;
     left:10%;
 }
 
-
+/* all buttons */
 .button{
-    margin: 20px 0;
     display:flex;
     justify-content: center;
 }
@@ -86,34 +87,50 @@ h4{
 }
 
 #open{
-    margin-top: 1%;
     margin-right: 5%;
-    margin-bottom: 10%;
-    /* background-color: #c99e87; */
+    margin-bottom: 2%;
     background-color: wheat;
 }
 
 #add{
     margin-left: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 2%;
     margin-right: 5%;
     background-color: #98D69D;
 }
 
+#list{
+    background-color: wheat;
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
 #edit{
+    margin-top: 2%;
+    margin-bottom: 2%;
     background-color:#a0bff0;
 }
 
 #delete{
     background-color:#FF7F7F;
+    margin-bottom: 2%;
 }
 
-#list{
-    background-color: wheat;
-    margin-top: 1%;
-    margin-left: 5%;
-    margin-bottom: 10%;
+#back,#next{
+    background-color: #FFD580;
 }
+
+#back{
+    margin-right: 10%;
+}
+
+#next{
+    margin-left: 10%;
+}
+
+#home{
+    background-color: #D8BFD8;
+} 
 
 /* add user page */
 .input{

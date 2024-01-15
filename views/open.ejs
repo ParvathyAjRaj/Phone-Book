@@ -7,16 +7,27 @@
     <link rel="stylesheet" href="/styles/new.css">
 </head>
 <body>
-    <div>
+    <hr>
+    <h1>Contact 📞</h1>
+    <hr>
+    <br>
+    <div class="open-body">
         <%
         let name = details[0].name
         let contact =  details[0].contact 
         let index = locals.index;    
         %>
-        <p>
-            <%= name %>
-            <%= contact %>
-        </p>
+        <div class="image-container open">
+            <!-- <img class="open_book" src="/images/open_book_gif.gif" alt="open book" width="100%" height="100%"> -->
+            <div class="open-box">
+                <div>
+                    <dl>
+                        <dd  class="each_contact"><h4><img class="image" src="/images/person.png" alt="person">  <%= name %></h4></dd>
+                        <dd  class="each_contact"><h4><img class="image" src="/images/phone.png" alt="phone"><%= contact %></h4></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
 
         <div class="button">
             <a class="btn" id="edit" href="/edit/<%= index %>">Edit Contact</a>
@@ -26,10 +37,8 @@
         </div>
     </div>
     <div class="button">
-        <a class="btn" id="back" href="<%= back %>">Back Page</a>
-    </div>
-    <div class="button">
-        <a class="btn" id="next" href="<%= next %>">Next Page</a>
+        <a class="btn" id="back" href="<%= back %>">Back Page ⬅️</a>
+        <a class="btn" id="next" href="<%= next %>">Next Page ➡️</a>
     </div>
 </body>
 </html>

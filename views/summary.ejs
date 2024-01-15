@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="/styles/new.css">
 </head>
 <body>
-    <div class="CS">
-        <ul class="all_students"> 
+    <hr>
+    <h1>Contact List</h1>
+    <hr>
+    <br>
+    <div class="summary">
+        <ul class="all_contacts"> 
             <% if (locals.details) {%>
                 <% for( var i = 0;i<details.length;i++){ %>
                        <% let id = details[i].id;%>
@@ -26,6 +30,9 @@
                    <% } %>
            <% } %>
         </ul>
+    </div>
+    <div class="button">
+        <a class="btn" id="home" href="/home">Home Page</a>
     </div>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="/styles/new.css">
+</head>
+<body>
+    <div class="CS">
+        <ul class="all_students"> 
+            <% if (locals.details) {%>
+                <% for( var i = 0;i<details.length;i++){ %>
+                       <% let id = details[i].id;%>
+                       <% let name = details[i].name; %>
+                       <% let phone_num = details[i].contact %>
+                        <div class="box">
+                            <div>
+                                <dl>
+                                    <dd  class="each_student"><h4><img class="image" src="/images/person.png" alt="person">  <%= name %></h4></dd>
+                                    <dd  class="each_student"><h4><img class="image" src="/images/phone.png" alt="phone"><%= phone_num %></h4></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <br>
+                   <% } %>
+           <% } %>
+        </ul>
+    </div>
+</body>
+</html>

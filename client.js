@@ -17,9 +17,8 @@ app.get("/home",(req,res)=>{
 // Get all posts
 app.get("/phonebook",async(req,res) => {
  const response = await axios.get(`${API_URL}/phonebook`);
- res.render("open.ejs",{
+ res.render("summary.ejs",{
     details : response.data,
-    index:0
  })
 })
 
@@ -29,7 +28,6 @@ app.get("/phonebook/:id",async(req,res) => {
     const response = await axios.get(`${API_URL}/phonebook/${id}`);
     let details = response.data;
     let next = `http://localhost:${port}/home`
-    console.log(details);
     if(id <= details.length){
         next = `http://localhost:${port}/phonebook/${id+1}`
     }

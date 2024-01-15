@@ -11,46 +11,19 @@
     <div class="image-container">
         <img  src="/images/closed_book_gif_1.gif" alt="phone book" height="40%" width="40%">
         <div class="button">
-            <a class="btn" id="open" href="/phonebook/0">Open</a>
+            <a class="btn" id="open" href="/phonebook/0">Open phonebook</a>
+        </div>
+        <div class="button">
+            <a class="btn" id="add" href="/new">Add contact</a>
+        </div>
+        <div class="button">
+            <a class="btn" id="list" href="/phonebook">List contacts</a>
         </div>
     </div>
     
     
     
 
-    <!-- old -->
-    <!-- <hr style="color:brown">
-    <h1>Phone Book</h1>
-    <br>
-    <div class="CS">
-        <ul class="all_students"> -->
-            <% if (locals.details) {%>
-                <% for( var i = 0;i<details.length;i++){ %>
-                       <% let id = details[i].id;%>
-                       <% let name = details[i].name; %>
-                       <% let phone_num = details[i].contact %>
-                        <!-- <div class="box">
-                            <div>
-                                <dl>
-                                    <dd id="unique"><%= id %></dd>
-                                    <dd  class="each_student"><h4><img class="image" src="/images/person.png" alt="person">  <%= name %></h4></dd>
-                                    <dd  class="each_student"><h4><img class="image" src="/images/phone.png" alt="phone"><%= phone_num %></h4></dd>
-                                </dl>
-                            </div>
-                        </div>
-                        <br> -->
-                   <% } %>
-           <% } %>
-        </ul>
-    <!-- </div>
-    <div class="button">
-        <a class="btn" id="add" href="/new">New Contact</a>
-    </div>
-    <div class="button">
-        <a class="btn" id="edit" href="/edit">Edit Contact</a>
-    </div>
-    <div class="button">
-        <a class="btn" id="delete" href="/del">Delete Contact</a>
-    </div>     -->
+    
 </body>
 </html>

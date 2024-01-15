@@ -1,13 +1,25 @@
 @media (min-width:800px){
     .btn{
         /* padding: 10px 15px; */
-        font-size: 1rem;
+        /* font-size: 1rem; */
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.3s;
         color: black;
         text-align: center;
     }
+}
+
+h1{
+    text-align: center;
+    /* border:3px solid brown; */
+    border-radius: 10px;
+    background-color: antiquewhite;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .image-container{
@@ -17,6 +29,45 @@
     width:100%;
     height:30%;
 }
+
+/* summary page */
+.CS{
+    display:flex;
+    justify-content: center;
+}
+
+
+.image{
+    padding-top: 4%;
+    margin-top: 2%;
+    height:10%;
+    width:10%;
+    border-radius: 50%;
+    
+}
+
+h4{
+    margin:2%;
+}
+
+.all_students{
+    padding:1%;
+}
+
+.box{
+    height:100px;
+    width:200px;
+    border:2px solid brown;
+    border-radius: 6px;
+    /* background-color: antiquewhite; */
+    color:brown;
+}
+
+.each_student{
+    position: relative;
+    left:10%;
+}
+
 
 .button{
     margin: 20px 0;
@@ -36,9 +87,17 @@
 
 #open{
     margin-top: 1%;
+    margin-right: 5%;
     margin-bottom: 10%;
     /* background-color: #c99e87; */
     background-color: wheat;
+}
+
+#add{
+    margin-left: 5%;
+    margin-bottom: 10%;
+    margin-right: 5%;
+    background-color: #98D69D;
 }
 
 #edit{
@@ -47,4 +106,29 @@
 
 #delete{
     background-color:#FF7F7F;
+}
+
+#list{
+    background-color: wheat;
+    margin-top: 1%;
+    margin-left: 5%;
+    margin-bottom: 10%;
+}
+
+/* add user page */
+.input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.value{
+    color:black;
+    padding:10px,15px;
+    margin:10px;
+}
+
+#textbox{
+    border:2px solid black;
+    border-radius: 40px;
 }

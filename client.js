@@ -29,13 +29,18 @@ app.get("/phonebook/:index",async(req,res) => {
     const response = await axios.get(`${API_URL}/phonebook/${index}`);
     let details = response.data;
     let next = `http://localhost:${port}/home`
+    let back = `http://localhost:${port}/home`
     if(index <= details.length){
         next = `http://localhost:${port}/phonebook/${index+1}`
+        if (index > 0){
+            back = `http://localhost:${port}/phonebook/${index-1}`
+        }
     }
     if (details.data){
         res.render("open.ejs",{
             details : [details.data],
             next: next,
+            back:back,
             index : index
         })
     }
@@ -85,27 +90,26 @@ app.post("/update/:index",async(req,res)=>{
     const length = response.data.length;
     console.log(details,length);
     let next = `http://localhost:${port}/home`
-    if(index <= details.length){
+    let back = `http://localhost:${port}/home`
+    if(index <= length){
         next = `http://localhost:${port}/phonebook/${index+1}`
+        if (index > 0){
+            back = `http://localhost:${port}/phonebook/${index-1}`
+        }
     }
     res.render("open.ejs",{
         details : [details],
         index:index,
+        back:back,
         next:next
     })
 })
 
-// on clicking delete option in home page, go to deleteUser.ejs
-app.get("/del",(req,res) => {
-    res.render("deleteUser.ejs")
-})
-
 // on clicking delete button in deleteUser.ejs, ask server to delete any user
-app.post("/delete",async(req,res) => {
-    console.log(req.body);
-    let id = req.body.id;
-    const response = await axios.delete(`${API_URL}/remove/${id}`);
-    res.render("home.ejs",{details:response.data});
+app.get("/delete/:index",async(req,res) => {
+    let index = parseInt(req.params.index);
+    const response = await axios.delete(`${API_URL}/remove/${index}`);
+    res.render("home.ejs")
 })
 
 // Listening to the port

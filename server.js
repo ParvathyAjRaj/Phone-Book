@@ -63,12 +63,11 @@ app.patch("/edit",(req,res)=> {
 })
 
 // delete the post
-app.delete("/remove/:id",(req,res) => {
-    let remove_id = parseInt(req.params.id);
+app.delete("/remove/:index",(req,res) => {
+    let remove_index = parseInt(req.params.index);
     // splice method => splice(starting index, no of elements to be removed from starting index)
-    let index = posts.findIndex((post) => post.id === remove_id);
-    if(index > -1){
-        posts.splice(index,1);
+    if(remove_index > -1){
+        posts.splice(remove_index,1);
         res.json(posts);
     }
     else{

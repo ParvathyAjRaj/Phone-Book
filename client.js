@@ -1,6 +1,7 @@
-import express from "express";
+import express, { request } from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 
 const app=express();
 const port = 3000;
@@ -8,7 +9,7 @@ const API_URL = "http://localhost:2000";
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/home",(req,res)=>{
     res.render("home.ejs");
@@ -23,18 +24,19 @@ app.get("/phonebook",async(req,res) => {
 })
 
 // Get a specific post by id
-app.get("/phonebook/:id",async(req,res) => {
-    let id = parseInt(req.params.id);
-    const response = await axios.get(`${API_URL}/phonebook/${id}`);
+app.get("/phonebook/:index",async(req,res) => {
+    let index = parseInt(req.params.index);
+    const response = await axios.get(`${API_URL}/phonebook/${index}`);
     let details = response.data;
     let next = `http://localhost:${port}/home`
-    if(id <= details.length){
-        next = `http://localhost:${port}/phonebook/${id+1}`
+    if(index <= details.length){
+        next = `http://localhost:${port}/phonebook/${index+1}`
     }
     if (details.data){
         res.render("open.ejs",{
             details : [details.data],
             next: next,
+            index : index
         })
     }
     else{
@@ -56,17 +58,40 @@ app.post("/add",async(req,res) => {
 })
 
 // on clicking edit option in home page, go to editUser.ejs
-app.get("/edit",(req,res) => {
-    res.render("editUser.ejs");
+app.get("/edit/:index",async(req,res) => {
+    let index = parseInt(req.params.index);
+    let request_id = uuidv4()
+    // console.log("[CLIENT] getting phonebook by id", id, request_id)
+    const response = await axios.get(`${API_URL}/phonebook/${index}`, {
+        headers:{
+            "request_id" : request_id
+        }
+    });
+    let details = response.data;
+    // console.log("[CLIENT] obtained phonebook by id", details, request_id)
+    res.render("editUser.ejs",{
+        details:[details.data],
+        index : index
+    });
 })
 
-// on clicking edit button in editUser.ejs, ask server to edit the user
-app.post("/update",async(req,res)=>{
-    let req_details = {id:req.body.id,name:req.body.name,contact:req.body.contact};
+// on clicking edit button in editUser.ejs, ask server to update the user
+app.post("/update/:index",async(req,res)=>{
+    let index = parseInt(req.params.index);
+    let req_details = {name:req.body.name,contact:req.body.contact,index:index};
     const response = await axios.patch(`${API_URL}/edit`,req_details);
     console.log(response.data);
-    res.render("home.ejs",{
-        details : response.data
+    const details = response.data.data;
+    const length = response.data.length;
+    console.log(details,length);
+    let next = `http://localhost:${port}/home`
+    if(index <= details.length){
+        next = `http://localhost:${port}/phonebook/${index+1}`
+    }
+    res.render("open.ejs",{
+        details : [details],
+        index:index,
+        next:next
     })
 })
 

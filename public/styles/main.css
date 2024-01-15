@@ -11,10 +11,10 @@ body{
 
 h1{
     text-align: center;
-    border:3px solid brown;
+    /* border:3px solid brown; */
     border-radius: 10px;
-    /* background-color: antiquewhite; */
-    color: brown;
+    background-color: antiquewhite;
+    color: black;
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
@@ -90,15 +90,15 @@ h4{
 }
 
 #add{
-  background-color: #2ecc71;
+    background-color: #98D69D;
 }
 
 #edit{
-    background-color: blue;
+    background-color:#a0bff0;
 }
 
 #delete{
-    background-color: red;
+    background-color:#FF7F7F;
 }
 /* ------------------------------------------------ */
 /* add user page */
@@ -109,13 +109,13 @@ h4{
 }
 
 .value{
-    color:brown;
+    color:black;
     padding:10px,15px;
     margin:10px;
 }
 
 /* edit page */
 #textbox{
-    border:2px solid brown;
+    border:2px solid black;
     border-radius: 40px;
 }

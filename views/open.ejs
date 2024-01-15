@@ -10,7 +10,8 @@
     <div>
         <%
         let name = details[0].name
-        let contact =  details[0].contact     
+        let contact =  details[0].contact 
+        let index = locals.index;    
         %>
         <p>
             <%= name %>
@@ -18,7 +19,7 @@
         </p>
 
         <div class="button">
-            <a class="btn" id="edit" href="/edit">Edit Contact</a>
+            <a class="btn" id="edit" href="/edit/<%= index %>">Edit Contact</a>
         </div>
         <div class="button">
             <a class="btn" id="delete" href="/del">Delete Contact</a>

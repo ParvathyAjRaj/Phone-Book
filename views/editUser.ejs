@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
     <hr>
     <h1>Edit Contact</h1>
     <hr>
     <br>
-    <form method="post" action="/update">
-        <div class="input">
-            <label class="value">Id No.</label>
-            <input id="textbox" class="value" type="text" name="id">
-        </div>
+    <%  let index = parseInt(locals.index) %>
+    <form method="post" action="/update/<%= index %>">
+        <% 
+            let name = locals.details[0].name;
+            let contact = locals.details[0].contact;
+        %>
         <div class="input">
             <label class="value">Name</label>
-            <input id="textbox" class="value" type="text" name="name">
+            <input id="textbox" class="value" type="text" name="name" value="<%= name %>">
         </div>
         <div class="input">
             <label class="value">Contact</label>
-            <input id="textbox" class="value" type="text" name="contact">
+            <input id="textbox" class="value" type="text" name="contact" value="<%= contact %>">
         </div>
         <div class="button">
             <button class="btn" id="edit" type="submit">Edit</button>

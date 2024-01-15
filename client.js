@@ -32,29 +32,35 @@ app.get("/search",(req,res)=>{
 // on clicking search button in search.ejs, ask server to search this name
 app.get("/search_name",async(req,res) => {
     let name = req.query.name;
-    const response = await axios.get(`${API_URL}/search/${name}`);
-    const data = response.data.data;
-    const index = response.data.index;
-    const length = response.data.length;
-    let next = `http://localhost:${port}/home`
-    let back = `http://localhost:${port}/home`
-    if(index <= length){
-        next = `http://localhost:${port}/phonebook/${index+1}`
-        if (index > 0){
-            back = `http://localhost:${port}/phonebook/${index-1}`
+    if(name){
+        const response = await axios.get(`${API_URL}/search/${name}`);
+        const data = response.data.data;
+        const index = response.data.index;
+        const length = response.data.length;
+        let next = `http://localhost:${port}/home`
+        let back = `http://localhost:${port}/home`
+        if(index <= length){
+            next = `http://localhost:${port}/phonebook/${index+1}`
+            if (index > 0){
+                back = `http://localhost:${port}/phonebook/${index-1}`
+            }
         }
-    }
-    if (data){
-        res.render("open.ejs",{
-            details : [data],
-            next: next,
-            back:back,
-            index : index
-        })
+        if (data){
+            res.render("open.ejs",{
+                details : [data],
+                next: next,
+                back:back,
+                index : index
+            })
+        }
+        else{
+            res.render("no_result.ejs");
+        }
     }
     else{
         res.render("no_result.ejs");
     }
+    
     
 })
 

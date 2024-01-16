@@ -29,7 +29,7 @@ app.get("/search/:name",(req,res) => {
 app.get("/phonebook/:id",(req,res)=>{
     const user_id = parseInt(req.params.id) 
     let request_id = req.headers["request_id"] 
-    // console.log("[SERVER] received request id", request_id)
+    console.log("[SERVER] received request id", request_id)
     const contact = contacts[user_id]
     const result = {
         "data": contact,

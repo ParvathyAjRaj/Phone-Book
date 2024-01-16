@@ -7,6 +7,14 @@ const app=express();
 const port = 3000;
 const API_URL = "http://localhost:2000";
 
+// middleware
+function requestId(req,res,next){
+    let request_id = uuidv4();
+    req.headers.request_id = request_id; 
+    next();
+}
+
+app.use(requestId);
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
@@ -106,15 +114,13 @@ app.post("/add",async(req,res) => {
 // on clicking edit option in home page, go to editContact.ejs
 app.get("/edit/:index",async(req,res) => {
     let index = parseInt(req.params.index);
-    let request_id = uuidv4()
-    // console.log("[CLIENT] getting phonebook by id", id, request_id)
+    console.log("[CLIENT] getting phonebook by index", index,  req.headers.request_id)
     const response = await axios.get(`${API_URL}/phonebook/${index}`, {
         headers:{
-            "request_id" : request_id
+            "request_id" : req.headers.request_id
         }
     });
     let details = response.data;
-    // console.log("[CLIENT] obtained phonebook by id", details, request_id)
     res.render("editContact.ejs",{
         details:[details.data],
         index : index

@@ -32,7 +32,7 @@ How to run the project :
 </ol>
 
 Result : You can view the phone book home page in "http://localhost:3000/home"
-![Screenshot of the Phone Book App]()
+![Screenshot of the Phone Book App](./public/images/PhoneBook_1.png)
 
 Improvements needed : 
 <ol>

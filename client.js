@@ -25,10 +25,17 @@ app.get("/home",(req,res)=>{
 
 // Get all posts
 app.get("/phonebook",async(req,res) => {
- const response = await axios.get(`${API_URL}/phonebook`);
- res.render("contactList.ejs",{
-    details : response.data,
- })
+    try{
+        const response = await axios.get(`${API_URL}/phonebook`);
+        res.render("contactList.ejs",{
+        details : response.data,
+        })
+    }catch(err){
+        if (err.code === "ECONNREFUSED"){
+            res.render("connectionRefused.ejs");
+        }
+    }
+ 
 })
 
 // on clicking search button from home page, go to contactList.ejs
@@ -39,62 +46,73 @@ app.get("/search",(req,res)=>{
 
 // on clicking search button in contactList.ejs, ask server to search this name
 app.get("/search_name",async(req,res) => {
-    let name = req.query.name;
-    if(name){
-        const response = await axios.get(`${API_URL}/search/${name}`);
-        const data = response.data.data;
-        const index = response.data.index;
-        const length = response.data.length;
+    try{
+        let name = req.query.name;
+        if(name){
+            const response = await axios.get(`${API_URL}/search/${name}`);
+            const data = response.data.data;
+            const index = response.data.index;
+            const length = response.data.length;
+            let next = `http://localhost:${port}/home`
+            let back = `http://localhost:${port}/home`
+            if(index <= length){
+                next = `http://localhost:${port}/phonebook/${index+1}`
+                if (index > 0){
+                    back = `http://localhost:${port}/phonebook/${index-1}`
+                }
+            }
+            if (data){
+                res.render("openBook.ejs",{
+                    details : [data],
+                    next: next,
+                    back:back,
+                    index : index
+                })
+            }
+            else{
+                res.render("no_result.ejs");
+            }
+        }
+        else{
+            res.render("no_result.ejs");
+        }
+    }catch(err){
+        if (err.code === "ECONNREFUSED"){
+            res.render("connectionRefused.ejs");
+        }
+    }   
+    
+})
+
+// Get a specific post by id
+app.get("/phonebook/:index",async(req,res) => {
+    try{
+        let index = parseInt(req.params.index);
+        const response = await axios.get(`${API_URL}/phonebook/${index}`);
+        let details = response.data;
         let next = `http://localhost:${port}/home`
         let back = `http://localhost:${port}/home`
-        if(index <= length){
+        if(index <= details.length){
             next = `http://localhost:${port}/phonebook/${index+1}`
             if (index > 0){
                 back = `http://localhost:${port}/phonebook/${index-1}`
             }
         }
-        if (data){
+        if (details.data){
             res.render("openBook.ejs",{
-                details : [data],
+                details : [details.data],
                 next: next,
                 back:back,
                 index : index
             })
         }
         else{
-            res.render("no_result.ejs");
+            res.render("home.ejs");
         }
-    }
-    else{
-        res.render("no_result.ejs");
-    }
-    
-    
-})
-
-// Get a specific post by id
-app.get("/phonebook/:index",async(req,res) => {
-    let index = parseInt(req.params.index);
-    const response = await axios.get(`${API_URL}/phonebook/${index}`);
-    let details = response.data;
-    let next = `http://localhost:${port}/home`
-    let back = `http://localhost:${port}/home`
-    if(index <= details.length){
-        next = `http://localhost:${port}/phonebook/${index+1}`
-        if (index > 0){
-            back = `http://localhost:${port}/phonebook/${index-1}`
+    }catch(err){
+        if (err.code === "ECONNREFUSED"){
+            res.render("connectionRefused.ejs");
         }
-    }
-    if (details.data){
-        res.render("openBook.ejs",{
-            details : [details.data],
-            next: next,
-            back:back,
-            index : index
-        })
-    }
-    else{
-        res.render("home.ejs");
     }
 })
 
@@ -105,10 +123,17 @@ app.get("/new",async(req,res) => {
 
 // on clicking add button in addContact.ejs, ask server to add this user
 app.post("/add",async(req,res) => {
-    const response = await axios.post(`${API_URL}/add`,req.body);
-    res.render("home.ejs",{
-        details : response.data
-    })
+    try{
+        const response = await axios.post(`${API_URL}/add`,req.body);
+        res.render("home.ejs",{
+            details : response.data
+        })
+    }catch(err){
+        if (err.code === "ECONNREFUSED"){
+            res.render("connectionRefused.ejs");
+        }
+    }
+    
 })
 
 // on clicking edit option in home page, go to editContact.ejs

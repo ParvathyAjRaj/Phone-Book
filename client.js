@@ -114,7 +114,7 @@ app.post("/add",async(req,res) => {
 // on clicking edit option in home page, go to editContact.ejs
 app.get("/edit/:index",async(req,res) => {
     let index = parseInt(req.params.index);
-    console.log("[CLIENT] getting phonebook by index", index,  req.headers.request_id)
+    // console.log("[CLIENT] getting phonebook by index", index,  req.headers.request_id)
     const response = await axios.get(`${API_URL}/phonebook/${index}`, {
         headers:{
             "request_id" : req.headers.request_id

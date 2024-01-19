@@ -39,6 +39,7 @@ Improvements needed :
 <ol>
 <li>While searching, the result will be displayed only if the search name strictly matches any of the names in the list. Need to improvise this by giving search result 
   that partially matches any of the contact item </li>
+  <li>If there are more than one contacts with same name, when we search, only the first one will be shown. Need to list all the contact details.</li>
 </ol>
 
 
